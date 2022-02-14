@@ -18,6 +18,9 @@ import abi from "./contracts/MyEpicNFT.json"
 
 import theme from './theme'
 import Header from "./layout/Header"
+import Hero from "./components/Hero/Hero"
+import Selector from "./components/NFTs/Selector"
+import EmailSignup from "./components/CTAs/EmailSignup"
 import Footer from "./layout/Footer"
 import Message from "./components/Messages/Message"
 import Notification from "./components/Notification/Notification"
@@ -47,16 +50,16 @@ const App = () => {
 
     const connectWallet = async () => {
       try {
-        const { ethereum } = window;
+        const { ethereum } = window
   
         if (!ethereum) {
           setNotificationMessage("No wallet found. Get MetaMask!")
           setNotificationLevel("warning")
-          return;
+          return
         }
   
-        const accounts = await ethereum.request({ method: "eth_requestAccounts" });
-        setCurrentAccount(accounts[0]);
+        const accounts = await ethereum.request({ method: "eth_requestAccounts" })
+        setCurrentAccount(accounts[0])
       } catch (error) {
         console.log(error)
       }
@@ -71,18 +74,14 @@ const App = () => {
       <Box w='100%'>
         <Container maxW='container.xl' py='5'>
           {notificationMessage && <Notification level={notificationLevel} message={notificationMessage} />}
-        </Container>
-      </Box>
-
-      <Box w='100%'>
-        <Container maxW='container.xl' py='5'>
-         <Heading as='h2' fontSize='5xl'>Hero Banner</Heading>
+          <Hero title="Hero Banner" />
         </Container>
       </Box>
 
       <Box w='100%'>
         <Container maxW='container.xl' py='5'>
           <Heading as='h3' fontSize='lg'>NFT Section</Heading>
+          <Selector />
         </Container>
       </Box>
 
@@ -95,6 +94,7 @@ const App = () => {
       <Box w='100%'>
         <Container maxW='container.xl' py='5'>
           <Heading as='h3' fontSize='lg'>Signup CTA</Heading>
+          <EmailSignup />
         </Container>
       </Box>
       
@@ -103,4 +103,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default App
