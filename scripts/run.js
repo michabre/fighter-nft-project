@@ -1,16 +1,20 @@
+const base64 = require('base-64')
+
 const main = async () => {
-    const nftContractFactory = await hre.ethers.getContractFactory('MyEpicNFT');
-    const nftContract = await nftContractFactory.deploy();
-    await nftContract.deployed();
-    console.log("Contract deployed to:", nftContract.address);
+    const nftContractFactory = await hre.ethers.getContractFactory('MyEpicNFT')
+    const nftContract = await nftContractFactory.deploy()
+    await nftContract.deployed()
+    console.log("Contract deployed to:", nftContract.address)
   
     // Call the function.
-    let txn = await nftContract.makeAnEpicNFT()
+    let jsonData1 = base64.encode('{"description": "The Hipster Visionary", "external_url": "https://drive.google.com/file/d/1XpmFTpYoeKW_9jAeIPalAKqsAqIdypMM/view?usp=sharing", "image": "https://www.tiredbicycle.com/nft/kyle.png", "name": "Kyle"}')
+    let txn = await nftContract.makeAnEpicNFT(jsonData1)
     // Wait for it to be mined.
     await txn.wait()
   
     // Mint another NFT for fun.
-    txn = await nftContract.makeAnEpicNFT()
+    let jsonData2 = base64.encode('{"description": "The Classical Artist", "external_url": "https://drive.google.com/file/d/1XpmFTpYoeKW_9jAeIPalAKqsAqIdypMM/view?usp=sharing", "image": "https://www.tiredbicycle.com/nft/bob.png", "name": "Bob"}') 
+    txn = await nftContract.makeAnEpicNFT(jsonData2)
     // Wait for it to be mined.
     await txn.wait()
   
@@ -18,12 +22,12 @@ const main = async () => {
   
   const runMain = async () => {
     try {
-      await main();
-      process.exit(0);
+      await main()
+      process.exit(0)
     } catch (error) {
-      console.log(error);
-      process.exit(1);
+      console.log(error)
+      process.exit(1)
     }
-  };
+  }
   
-  runMain();
+  runMain()
