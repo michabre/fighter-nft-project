@@ -25,6 +25,11 @@ import Footer from "./layout/Footer"
 import Message from "./components/Messages/Message"
 import Notification from "./components/Notification/Notification"
 
+const TWITTER_HANDLE = 'michabre'
+const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`
+const OPENSEA_LINK = ''
+const TOTAL_MINT_COUNT = 50
+
 const App = () => {
   let provider
   let signer
@@ -41,29 +46,51 @@ const App = () => {
   const contractAddress = ""
   const contractABI = abi.abi
 
-    /*
+  const checkIfWalletIsConnected = async () => {
+    const { ethereum } = window
+
+    if (!ethereum) {
+      console.log("Make sure you have metamask!")
+      return
+    } else {
+      console.log("We have the ethereum object", ethereum)
+    }
+
+    const accounts = await ethereum.request({ method: 'eth_accounts' })
+
+    if (accounts.length !== 0) {
+      const account = accounts[0]
+      console.log("Found an authorized account:", account)
+      setCurrentAccount(account)
+    } else {
+      console.log("No authorized account found")
+    }
+  }
+
+  const connectWallet = async () => {
+    try {
+      const { ethereum } = window
+
+      if (!ethereum) {
+        setNotificationMessage("No wallet found. Get MetaMask!")
+        setNotificationLevel("warning")
+        return
+      }
+
+      const accounts = await ethereum.request({ method: "eth_requestAccounts" })
+      setCurrentAccount(accounts[0])
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  /*
   * This runs our function when the page loads.
   */
-    useEffect(() => {
-      console.log('useEffect fired')
-    })
-
-    const connectWallet = async () => {
-      try {
-        const { ethereum } = window
-  
-        if (!ethereum) {
-          setNotificationMessage("No wallet found. Get MetaMask!")
-          setNotificationLevel("warning")
-          return
-        }
-  
-        const accounts = await ethereum.request({ method: "eth_requestAccounts" })
-        setCurrentAccount(accounts[0])
-      } catch (error) {
-        console.log(error)
-      }
-    }
+  useEffect(() => {
+    console.log('useEffect fired')
+    checkIfWalletIsConnected()
+  })
 
   return (
     <>
@@ -71,7 +98,7 @@ const App = () => {
 
       <Header title="NFT Machine" mode={toggleColorMode} current={colorMode} account={currentAccount} connect={connectWallet} />
 
-      <Box w='100%'>
+      <Box w='100%' h='30vh'>
         <Container maxW='container.xl' py='5'>
           {notificationMessage && <Notification level={notificationLevel} message={notificationMessage} />}
           <Hero title="Hero Banner" />
@@ -98,7 +125,7 @@ const App = () => {
         </Container>
       </Box>
       
-      <Footer copyright="&copy; 2022 Lakwatzero Digital" />
+      <Footer copyright="Lakwatzero Digital" twitterHandle={TWITTER_HANDLE} twitterLink={TWITTER_LINK} />
     </>
   );
 }
