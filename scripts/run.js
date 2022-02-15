@@ -11,13 +11,7 @@ const main = async () => {
     let txn = await nftContract.makeAnEpicNFT(jsonData1)
     // Wait for it to be mined.
     await txn.wait()
-  
-    // Mint another NFT for fun.
-    let jsonData2 = base64.encode('{"description": "The Classical Artist", "external_url": "https://drive.google.com/file/d/1XpmFTpYoeKW_9jAeIPalAKqsAqIdypMM/view?usp=sharing", "image": "https://www.tiredbicycle.com/nft/bob.png", "name": "Bob"}') 
-    txn = await nftContract.makeAnEpicNFT(jsonData2)
-    // Wait for it to be mined.
-    await txn.wait()
-  
+    
   };
   
   const runMain = async () => {

@@ -16,7 +16,7 @@ contract MyEpicNFT is ERC721URIStorage {
 
   // We need to pass the name of our NFTs token and its symbol.
   constructor() ERC721 ("MMA Fighters", "DJMMA") {
-    console.log("This is my NFT contract. Woah!");
+    console.log("NFT contract has been deployed. Woah!");
   }
 
   // A function our user will hit to get their NFT.
