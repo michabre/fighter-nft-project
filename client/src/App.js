@@ -19,6 +19,8 @@ import abi from "./contracts/MyEpicNFT.json"
 import theme from './theme'
 import Header from "./layout/Header"
 import Hero from "./components/Hero/Hero"
+import Slideshow from "./components/Slideshow/Slideshow"
+import FighterStats from "./components/Stats/FighterStats"
 import Selector from "./components/NFTs/Selector"
 import EmailSignup from "./components/CTAs/EmailSignup"
 import Footer from "./layout/Footer"
@@ -98,10 +100,13 @@ const App = () => {
 
       <Header title="NFT Machine" mode={toggleColorMode} current={colorMode} account={currentAccount} connect={connectWallet} />
 
-      <Box w='100%' h='30vh'>
+      <Box w='100%'>
         <Container maxW='container.xl' py='5'>
           {notificationMessage && <Notification level={notificationLevel} message={notificationMessage} />}
-          <Hero title="Hero Banner" />
+          <Hero title="Hero Banner">
+            <Slideshow />
+            <FighterStats data="" />
+          </Hero>
         </Container>
       </Box>
 
