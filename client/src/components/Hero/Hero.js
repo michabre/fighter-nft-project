@@ -1,8 +1,6 @@
 import React from 'react'
 
-import { Heading } from '@chakra-ui/react'
-
-const Hero = ({ title, children }) => {
+const Hero = ({ children }) => {
     return (
         <>
           {children}

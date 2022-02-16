@@ -6,10 +6,10 @@ import {
   Stat,
   StatLabel,
   StatNumber,
-  StatHelpText, StatGroup, StatArrow
+  StatGroup
 } from '@chakra-ui/react'
 
-  import { FaWeight, FaCanadianMapleLeaf } from 'react-icons/fa';
+  import { FaCanadianMapleLeaf } from 'react-icons/fa';
 
 
 
@@ -19,7 +19,7 @@ const FighterStats = ({ data }) => {
     return(
       <>
         
-        <Text fontSize='xl' pb='0'>One Championship's</Text>
+        <Text fontSize='xl' pb='0'>{stats.organization}'s</Text>
         <Heading as='h2' size='4xl'>{stats.firstname}</Heading>
         <Heading as='h2' size='4xl' pb='5'>{stats.lastname}</Heading>
         <Text fontSize='lg'>{stats.class}</Text>
