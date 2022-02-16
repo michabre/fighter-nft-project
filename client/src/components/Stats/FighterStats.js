@@ -55,7 +55,8 @@ const FighterStats = ({ data }) => {
           </StatGroup>
         </Box>
 
-        <Text fontSize='md'><strong>Next Fight:</strong> To Be Announced...</Text>
+        <Text fontSize='md'><strong>Last Fight:</strong> {stats.lastfight}</Text>
+        <Text fontSize='md'><strong>Next Fight:</strong> {stats.nextfight}</Text>
     </>
     )
 }

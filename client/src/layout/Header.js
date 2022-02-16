@@ -12,8 +12,6 @@ import { LockIcon, MoonIcon, SunIcon, StarIcon} from '@chakra-ui/icons'
 
 import shortenAddress from '../helpers/shortenAddress'
 
-import './Header.css'
-
 const Header = ({ title, mode, current, account, connect }) => { 
   let icon = current === 'light' ? <SunIcon /> : <MoonIcon />
   return (
