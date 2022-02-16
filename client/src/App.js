@@ -1,3 +1,4 @@
+import { stats, header } from './data/data'
 import React, { useEffect, useState } from "react"
 import { 
   ColorModeScript, 
@@ -26,11 +27,16 @@ import EmailSignup from "./components/CTAs/EmailSignup"
 import Footer from "./layout/Footer"
 import Message from "./components/Messages/Message"
 import Notification from "./components/Notification/Notification"
+import "./App.css"
 
 const TWITTER_HANDLE = 'michabre'
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`
 const OPENSEA_LINK = ''
 const TOTAL_MINT_COUNT = 50
+
+
+
+
 
 const App = () => {
   let provider
@@ -98,14 +104,13 @@ const App = () => {
     <>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      <Header title="NFT Machine" mode={toggleColorMode} current={colorMode} account={currentAccount} connect={connectWallet} />
+      <Header title={header.name} mode={toggleColorMode} current={colorMode} account={currentAccount} connect={connectWallet} />
 
       <Box w='100%'>
         <Container maxW='container.xl' py='5'>
           {notificationMessage && <Notification level={notificationLevel} message={notificationMessage} />}
           <Hero title="Hero Banner">
-            <Slideshow />
-            <FighterStats data="" />
+            <FighterStats data={stats} />
           </Hero>
         </Container>
       </Box>

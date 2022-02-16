@@ -1,42 +1,61 @@
 import React from 'react'
 import {
-    Stat,
-    StatLabel,
-    StatNumber,
-    StatHelpText, StatGroup, StatArrow
-  } from '@chakra-ui/react'
+  Box,
+  Heading,
+  Text,
+  Stat,
+  StatLabel,
+  StatNumber,
+  StatHelpText, StatGroup, StatArrow
+} from '@chakra-ui/react'
 
-import { stats } from '../../data/data'
+  import { FaWeight, FaCanadianMapleLeaf } from 'react-icons/fa';
+
+
 
 const FighterStats = ({ data }) => {
-    console.log(stats.fighter)
+    let stats = data.fighter
 
     return(
       <>
-      <Stat>
-        <StatLabel>Stat Label</StatLabel>
-        <StatNumber>0</StatNumber>
-        <StatHelpText>informative test</StatHelpText>
-      </Stat>
-      <StatGroup>
-      <Stat>
-        <StatLabel>Sent</StatLabel>
-        <StatNumber>345,670</StatNumber>
-        <StatHelpText>
-          <StatArrow type='increase' />
-          23.36%
-        </StatHelpText>
-      </Stat>
-    
-      <Stat>
-        <StatLabel>Clicked</StatLabel>
-        <StatNumber>45</StatNumber>
-        <StatHelpText>
-          <StatArrow type='decrease' />
-          9.05%
-        </StatHelpText>
-      </Stat>
-    </StatGroup>
+        
+        <Text fontSize='xl' pb='0'>One Championship's</Text>
+        <Heading as='h2' size='4xl'>{stats.firstname}</Heading>
+        <Heading as='h2' size='4xl' pb='5'>{stats.lastname}</Heading>
+        <Text fontSize='lg'>{stats.class}</Text>
+        <Text fontSize='lg'>{stats.country} <span class="canada"><FaCanadianMapleLeaf /></span></Text>
+        <Text fontSize='lg'>{stats.gym}</Text>
+
+        <Box w='50%' py='5'>
+          <StatGroup>
+            <Stat>
+              <StatLabel>Record</StatLabel>
+              <StatNumber>{stats.record}</StatNumber>
+            </Stat>
+            <Stat>
+              <StatLabel>Style</StatLabel>
+              <StatNumber>{stats.style}</StatNumber>
+            </Stat>
+            <Stat>
+            </Stat>
+          </StatGroup>
+          <StatGroup py='3'>
+            <Stat>
+              <StatLabel>Height</StatLabel>
+              <StatNumber>{stats.height}</StatNumber>
+            </Stat>
+            <Stat>
+              <StatLabel>Weight</StatLabel>
+              <StatNumber>{stats.weight}</StatNumber>
+            </Stat>
+            <Stat>
+              <StatLabel>Reach</StatLabel>
+              <StatNumber>{stats.reach}</StatNumber>
+            </Stat>
+          </StatGroup>
+        </Box>
+
+        <Text fontSize='md'><strong>Next Fight:</strong> To Be Announced...</Text>
     </>
     )
 }

@@ -12,12 +12,14 @@ import { LockIcon, MoonIcon, SunIcon, StarIcon} from '@chakra-ui/icons'
 
 import shortenAddress from '../helpers/shortenAddress'
 
+import './Header.css'
+
 const Header = ({ title, mode, current, account, connect }) => { 
   let icon = current === 'light' ? <SunIcon /> : <MoonIcon />
   return (
       <Flex>
         <Box p='4'>
-          <Heading as='h1' fontSize='20px'>{title}</Heading>
+          <Heading as='h1' fontSize='32px'>{title}</Heading>
         </Box>
         <Spacer />
         <Box p='4'>
