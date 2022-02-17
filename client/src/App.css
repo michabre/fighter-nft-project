@@ -19,3 +19,13 @@ h1 {
 .chakra-text svg {
   display: inline-block;
 }
+
+
+.chakra-ui-dark .box-bg {
+  background: rgba(0,0,0,0.3);
+}
+
+.chakra-ui-dark #logo path {
+  fill: #fff;
+}
+

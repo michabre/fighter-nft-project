@@ -8,13 +8,15 @@ import {
 
 import { InfoIcon } from '@chakra-ui/icons'
 
-const levels = {
-  success: 'green.100',
-  error: 'orange.200',
-  warning: 'yellow.200',
-}
+
 
 const Notification = ({ level, message }) => {
+  const levels = {
+    success: 'green.100',
+    error: 'orange.200',
+    warning: 'yellow.200',
+  }
+  
   return (
     <Box bg={levels[level]} w='100%' my={5} p={4} color='black'>
       <HStack alignItems='center'>

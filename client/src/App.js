@@ -11,6 +11,8 @@ import {
   HStack,
   VStack, 
   Heading,
+  Grid,
+  GridItem,
   Input, 
   Text,
   Textarea } from '@chakra-ui/react'
@@ -25,7 +27,6 @@ import FighterStats from "./components/Stats/FighterStats"
 import Selector from "./components/NFTs/Selector"
 import EmailSignup from "./components/CTAs/EmailSignup"
 import Footer from "./layout/Footer"
-import Message from "./components/Messages/Message"
 import Notification from "./components/Notification/Notification"
 
 import "./App.css"
@@ -85,7 +86,7 @@ const App = () => {
       const accounts = await ethereum.request({ method: "eth_requestAccounts" })
       setCurrentAccount(accounts[0])
     } catch (error) {
-      console.log(error)
+      console.log('Error', error)
     }
   }
 
@@ -101,10 +102,10 @@ const App = () => {
     <>
       <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
-      <Header title={header.name} mode={toggleColorMode} current={colorMode} account={currentAccount} connect={connectWallet} />
+      <Header title={header.name} logo={header.logo} mode={toggleColorMode} current={colorMode} account={currentAccount} connect={connectWallet} />
 
-      <Box w='100%'>
-        <Container maxW='container.xl' py='5'>
+      <Box w='100%' pt='5'>
+        <Container maxW='container.xl'>
           {notificationMessage && <Notification level={notificationLevel} message={notificationMessage} />}
           <Hero title="Hero Banner">
             <FighterStats data={stats} />
@@ -112,23 +113,38 @@ const App = () => {
         </Container>
       </Box>
 
+      <Box w='100%' mb='5'>
+        <Container maxW='container.xl'>
+          <HStack spacing='24px'>
+            <Box w='100%' h='100' p='5' className='box-bg'>
+              <Heading as='h3' fontSize='lg'>Sponsors</Heading>
+            </Box>
+            <Box w='100%' h='100' p='5' className='box-bg'>
+              <Heading as='h3' fontSize='lg'>Social Media</Heading>
+            </Box>
+          </HStack>
+        </Container>
+      </Box>
+
       <Box w='100%'>
-        <Container maxW='container.xl' py='5'>
-          <Heading as='h3' fontSize='lg'>NFT Section</Heading>
-          <Selector />
+        <Container maxW='container.xl'>
+          <Box w='100%' h='100px' p='5' className='box-bg'>
+            <Heading as='h3' fontSize='lg'>NFT Section</Heading>
+            <Selector />
+          </Box>
         </Container>
       </Box>
 
       <Box w='100%'>
         <Container maxW='container.xl' py='5'>
-          <Heading as='h3' fontSize='lg'>Sponsors / Social Media</Heading>
-        </Container>
-      </Box>
-
-      <Box w='100%'>
-        <Container maxW='container.xl' py='5'>
-          <Heading as='h3' fontSize='lg'>Signup CTA</Heading>
-          <EmailSignup />
+          <Box w='100%' h='100px' p='5'>
+            <Center>
+              <Heading as='h3' fontSize='lg'>Signup CTA</Heading>
+            </Center>
+            <Center>
+              <EmailSignup />
+            </Center>
+          </Box>
         </Container>
       </Box>
       

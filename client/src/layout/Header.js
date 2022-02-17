@@ -5,6 +5,7 @@ import {
   Box,
   Flex,
   Heading,
+  Image,
   Spacer
 } from '@chakra-ui/react'
 
@@ -15,9 +16,9 @@ import shortenAddress from '../helpers/shortenAddress'
 const Header = ({ title, mode, current, account, connect }) => { 
   let icon = current === 'light' ? <SunIcon /> : <MoonIcon />
   return (
-      <Flex>
-        <Box p='4'>
-          <Heading as='h1' fontSize='32px'>{title}</Heading>
+      <Flex className='box-bg'>
+        <Box p='4' display='flex' alignItems='center'>
+          <Heading as='h1' fontSize='24px'>{title}</Heading>
         </Box>
         <Spacer />
         <Box p='4'>
