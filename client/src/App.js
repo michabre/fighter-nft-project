@@ -1,5 +1,6 @@
 import { stats, header } from './data/data'
 import React, { useEffect, useState } from "react"
+import Base64 from "base-64"
 import { 
   Box, 
   Button, 
@@ -37,7 +38,7 @@ const TOTAL_MINT_COUNT = 50
 const App = () => {
   let provider
   let signer
-  let myEpicNFTContract
+  let connectedContract
 
   const [currentAccount, setCurrentAccount] = useState("")
   const [status, setStatus] = useState("No active transaction")
@@ -87,6 +88,34 @@ const App = () => {
     }
   }
 
+  const askContractToMintNft = async () => {  
+    try {
+      const { ethereum } = window;
+  
+      if (ethereum) {
+        provider = new ethers.providers.Web3Provider(ethereum);
+        signer = provider.getSigner();
+        connectedContract = new ethers.Contract(contractAddress, contractABI, signer);
+
+        let jsonData = Base64.encode(`{"description": "The Hipster Visionary", "external_url": "", "image": "", "name": ""}`)
+  
+        console.log("Going to pop wallet now to pay gas...")
+        console.log(jsonData)
+        let nftTxn = await connectedContract.makeAnEpicNFT(jsonData);
+  
+        console.log("Mining...please wait.")
+        await nftTxn.wait();
+        
+        console.log(`Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTxn.hash}`);
+  
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   /*
   * This runs our function when the page loads.
   */
@@ -130,7 +159,9 @@ const App = () => {
           </Box>
           <Box w='70%' h='100px' p='5'>
             <Heading as='h3' fontSize='lg'>NFT Section</Heading>
-            <Selector />
+            <Button onClick={askContractToMintNft} className="cta-button connect-wallet-button">
+             Mint NFT
+            </Button>
           </Box>
           </HStack>
         </Container>
