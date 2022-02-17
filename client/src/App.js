@@ -27,6 +27,7 @@ import EmailSignup from "./components/CTAs/EmailSignup"
 import Footer from "./layout/Footer"
 import Message from "./components/Messages/Message"
 import Notification from "./components/Notification/Notification"
+
 import "./App.css"
 
 const TWITTER_HANDLE = 'michabre'

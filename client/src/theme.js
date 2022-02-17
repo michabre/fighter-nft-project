@@ -13,8 +13,8 @@ const config = {
 const theme = extendTheme({
   config,
   fonts: {
-    heading: 'Orelega One',
-    body: 'Roboto',
+    heading: 'Karla',
+    body: 'Montserrat',
   }
 })
 

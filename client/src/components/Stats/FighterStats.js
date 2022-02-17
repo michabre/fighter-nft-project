@@ -9,9 +9,7 @@ import {
   StatGroup
 } from '@chakra-ui/react'
 
-  import { FaCanadianMapleLeaf } from 'react-icons/fa';
-
-
+import { FaCanadianMapleLeaf } from 'react-icons/fa';
 
 const FighterStats = ({ data }) => {
     let stats = data.fighter
@@ -20,10 +18,10 @@ const FighterStats = ({ data }) => {
       <>
         
         <Text fontSize='xl' pb='0'>{stats.organization}'s</Text>
-        <Heading as='h2' size='4xl'>{stats.firstname}</Heading>
-        <Heading as='h2' size='4xl' pb='5'>{stats.lastname}</Heading>
+        <Heading as='h2' fontSize='100px' lineHeight='90px'>{stats.firstname}</Heading>
+        <Heading as='h2' fontSize='100px' lineHeight='90px' pb='3'>{stats.lastname}</Heading>
         <Text fontSize='lg'>{stats.class}</Text>
-        <Text fontSize='lg'>{stats.country} <span class="canada"><FaCanadianMapleLeaf /></span></Text>
+        <Text fontSize='lg'>{stats.country} <span className="canada"><FaCanadianMapleLeaf /></span></Text>
         <Text fontSize='lg'>{stats.gym}</Text>
 
         <Box w='50%' py='5'>
