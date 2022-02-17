@@ -64,14 +64,9 @@ const FighterStats = ({ data }) => {
               <Text fontSize='md'><strong>Next Fight:</strong></Text>
               <Text fontSize='md'>{stats.nextfight}</Text>
             </Box>
-
           </Flex>
-
-          
         </Box>
-
-        
-    </>
+      </>
     )
 }
 

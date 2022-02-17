@@ -5,22 +5,22 @@ import {
   Box,
   Flex,
   Heading,
-  Image,
   Spacer
 } from '@chakra-ui/react'
 
-import { LockIcon, MoonIcon, SunIcon, StarIcon} from '@chakra-ui/icons'
+import { LockIcon, StarIcon} from '@chakra-ui/icons'
+import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 import shortenAddress from '../helpers/shortenAddress'
 
-const Header = ({ title, mode, current, account, connect }) => { 
-  let icon = current === 'light' ? <SunIcon /> : <MoonIcon />
+const Header = ({ title, account, connect }) => { 
   return (
-      <Flex className='box-bg'>
+      <Flex>
         <Box p='4' display='flex' alignItems='center'>
           <Heading as='h1' fontSize='24px'>{title}</Heading>
         </Box>
         <Spacer />
+        
         <Box p='4'>
         <ButtonGroup variant='outline' spacing='2'>
           {!account && (
@@ -33,9 +33,9 @@ const Header = ({ title, mode, current, account, connect }) => {
               {shortenAddress(account)}
             </Button>
           )}
-            <Button leftIcon={icon} onClick={mode}>
-            I prefer the&nbsp;<strong>{current}</strong>
-            </Button>
+             <Button><FaFacebookF /></Button>
+            <Button><FaInstagram /></Button>
+            <Button><FaTwitter /></Button>
           </ButtonGroup>
         </Box>
       </Flex>

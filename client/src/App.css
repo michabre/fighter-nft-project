@@ -21,11 +21,7 @@ h1 {
 }
 
 
-.chakra-ui-dark .box-bg {
+.box-bg {
   background: rgba(0,0,0,0.3);
-}
-
-.chakra-ui-dark #logo path {
-  fill: #fff;
 }
 

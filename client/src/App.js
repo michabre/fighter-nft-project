@@ -1,8 +1,6 @@
 import { stats, header } from './data/data'
 import React, { useEffect, useState } from "react"
 import { 
-  ColorModeScript, 
-  useColorMode, 
   Box, 
   Button, 
   Center,
@@ -41,7 +39,6 @@ const App = () => {
   let signer
   let myEpicNFTContract
 
-  const { colorMode, toggleColorMode } = useColorMode()
   const [currentAccount, setCurrentAccount] = useState("")
   const [status, setStatus] = useState("No active transaction")
   const [username, setUsername] = useState("")
@@ -100,9 +97,7 @@ const App = () => {
 
   return (
     <>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-
-      <Header title={header.name} logo={header.logo} mode={toggleColorMode} current={colorMode} account={currentAccount} connect={connectWallet} />
+      <Header title={header.name} logo={header.logo} account={currentAccount} connect={connectWallet} />
 
       <Box w='100%' pt='5'>
         <Container maxW='container.xl'>
@@ -117,37 +112,30 @@ const App = () => {
         <Container maxW='container.xl'>
           <HStack spacing='24px'>
             <Box w='100%' h='100' p='5' className='box-bg'>
-              <Heading as='h3' fontSize='lg'>Sponsors</Heading>
+              <Heading as='h3' fontSize='xl'>Thank You To All My Sponsors</Heading>
             </Box>
             <Box w='100%' h='100' p='5' className='box-bg'>
-              <Heading as='h3' fontSize='lg'>Social Media</Heading>
+            <Heading as='h3' fontSize='xl'>Join Me On My Journey</Heading>
             </Box>
           </HStack>
         </Container>
       </Box>
 
-      <Box w='100%'>
+      {currentAccount && (<Box w='100%'>
         <Container maxW='container.xl'>
-          <Box w='100%' h='100px' p='5' className='box-bg'>
+        <HStack spacing='24px'>
+          <Box w='30%' h='100px' p='5' className='box-bg'>
             <Heading as='h3' fontSize='lg'>NFT Section</Heading>
             <Selector />
           </Box>
-        </Container>
-      </Box>
-
-      <Box w='100%'>
-        <Container maxW='container.xl' py='5'>
-          <Box w='100%' h='100px' p='5'>
-            <Center>
-              <Heading as='h3' fontSize='lg'>Signup CTA</Heading>
-            </Center>
-            <Center>
-              <EmailSignup />
-            </Center>
+          <Box w='70%' h='100px' p='5'>
+            <Heading as='h3' fontSize='lg'>NFT Section</Heading>
+            <Selector />
           </Box>
+          </HStack>
         </Container>
-      </Box>
-      
+      </Box>)}
+ 
       <Footer copyright="Lakwatzero Digital" twitterHandle={TWITTER_HANDLE} twitterLink={TWITTER_LINK} />
     </>
   );
