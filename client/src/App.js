@@ -4,27 +4,20 @@ import Base64 from "base-64"
 import { 
   Box, 
   Button, 
-  Center,
   Container, 
-  Flex, 
   HStack,
-  VStack, 
   Heading,
-  Grid,
-  GridItem,
   Input, 
-  Text,
   Textarea } from '@chakra-ui/react'
 import { ethers } from "ethers"
 import abi from "./contracts/MyEpicNFT.json"
 
-import theme from './theme'
 import Header from "./layout/Header"
 import Hero from "./components/Hero/Hero"
-import Slideshow from "./components/Slideshow/Slideshow"
+//import Slideshow from "./components/Slideshow/Slideshow"
 import FighterStats from "./components/Stats/FighterStats"
 import Selector from "./components/NFTs/Selector"
-import EmailSignup from "./components/CTAs/EmailSignup"
+//import EmailSignup from "./components/CTAs/EmailSignup"
 import Footer from "./layout/Footer"
 import Notification from "./components/Notification/Notification"
 
@@ -32,8 +25,8 @@ import "./App.css"
 
 const TWITTER_HANDLE = 'michabre'
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`
-const OPENSEA_LINK = ''
-const TOTAL_MINT_COUNT = 50
+// const OPENSEA_LINK = ''
+// const TOTAL_MINT_COUNT = 50
 
 const App = () => {
   let provider
@@ -41,11 +34,16 @@ const App = () => {
   let connectedContract
 
   const [currentAccount, setCurrentAccount] = useState("")
-  const [status, setStatus] = useState("No active transaction")
-  const [username, setUsername] = useState("")
-  const [message, setMessage] = useState("")
+  //const [status, setStatus] = useState("No active transaction")
   const [notificationMessage, setNotificationMessage] = useState("")
   const [notificationLevel, setNotificationLevel] = useState("")
+
+  // NFT Details
+  const [nftDescription, setNftDescription] = useState("")
+  const [nftName, setNftName] = useState("")
+  const [nftImage, setNftImage] = useState("")
+  const [nftExternalUrl, setExternalNftUrl] = useState("")
+
 
   const contractAddress = ""
   const contractABI = abi.abi
@@ -97,10 +95,9 @@ const App = () => {
         signer = provider.getSigner();
         connectedContract = new ethers.Contract(contractAddress, contractABI, signer);
 
-        let jsonData = Base64.encode(`{"description": "The Hipster Visionary", "external_url": "", "image": "", "name": ""}`)
+        let jsonData = Base64.encode(`{"description": "${nftDescription}", "external_url": "${nftExternalUrl}", "image": "${nftImage}", "name": "${nftName}"}`)
   
         console.log("Going to pop wallet now to pay gas...")
-        console.log(jsonData)
         let nftTxn = await connectedContract.makeAnEpicNFT(jsonData);
   
         console.log("Mining...please wait.")
@@ -116,11 +113,23 @@ const App = () => {
     }
   }
 
+  const updateStateValue = (event) => {
+    const action = {
+      "name": setNftName,
+      "description": setNftDescription,
+      "image": setNftImage,
+      "url": setExternalNftUrl
+    }
+    let text = event.target.value
+    let type = event.target.dataset.type
+
+    action[type](text)
+  }
+
   /*
   * This runs our function when the page loads.
   */
   useEffect(() => {
-    console.log('useEffect fired')
     checkIfWalletIsConnected()
   })
 
@@ -153,12 +162,50 @@ const App = () => {
       {currentAccount && (<Box w='100%'>
         <Container maxW='container.xl'>
         <HStack spacing='24px'>
-          <Box w='30%' h='100px' p='5' className='box-bg'>
+          <Box w='30%' p='5' className='box-bg'>
             <Heading as='h3' fontSize='lg'>NFT Section</Heading>
             <Selector />
           </Box>
-          <Box w='70%' h='100px' p='5'>
+          <Box w='70%' p='5'>
             <Heading as='h3' fontSize='lg'>NFT Section</Heading>
+
+            <HStack spacing='24px'>
+              <Box>
+                <Input 
+                  value={nftName}
+                  data-type="name"
+                  onChange={updateStateValue}
+                  placeholder='Enter your name' 
+                  size='lg' 
+                  mb={5} 
+                />
+                <Input 
+                  value={nftImage}
+                  data-type="image"
+                  onChange={updateStateValue}
+                  placeholder='Add an Image' 
+                  size='lg' 
+                  mb={5} 
+                />
+                <Input 
+                  value={nftExternalUrl}
+                  data-type="url"
+                  onChange={updateStateValue}
+                  placeholder='External URL' 
+                  size='lg' 
+                  mb={5} 
+                />
+                <Textarea
+                  value={nftDescription}
+                  data-type="description"
+                  onChange={updateStateValue}
+                  placeholder='Write a description'
+                  size='lg'
+                  mb={5}
+                />
+              </Box>
+            </HStack>
+
             <Button onClick={askContractToMintNft} className="cta-button connect-wallet-button">
              Mint NFT
             </Button>
