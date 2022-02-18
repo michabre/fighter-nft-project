@@ -14,7 +14,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  Text,
   Textarea,
   useDisclosure } from '@chakra-ui/react'
 import { ethers } from "ethers"
@@ -31,6 +30,8 @@ import Footer from "./layout/Footer"
 import Notification from "./components/Notification/Notification"
 
 import "./App.css"
+import StayTuned from './components/CTAs/StayTuned'
+import ContactMe from './components/CTAs/ContactMe'
 
 const TWITTER_HANDLE = 'michabre'
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`
@@ -55,8 +56,7 @@ const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
 
-  //const contractAddress = "0x1849b82aaF769adcaE510d5F59e995c2728AD27F" // mumbai
-  const contractAddress = "0xc527209D5181D1113D91c53D76c0c2dC6a0bE260" // ganache
+  const contractAddress = "0x04d8d376Bf9d6ceA8E6d900F9305b2a9401025d3"
   const contractABI = abi.abi
 
   const checkIfWalletIsConnected = async () => {
@@ -76,15 +76,9 @@ const App = () => {
     console.log("Connected to chain " + chainId);
 
     const mumbaiChainId = "0x13881"; 
-    const ganacheChainId = "0x539";
-    // if (chainId !== mumbaiChainId) {
-    //   console.log("You are not connected to the Mumbai Test Network!");
-    // }
-
-    if (chainId !== ganacheChainId) {
-      console.log("You are not connected to the Ganache Test Network!");
-      setNotificationMessage("You are not connected to the Ganache Test Network!")
-      setNotificationLevel("warning")
+    //const ganacheChainId = "0x539";
+    if (chainId !== mumbaiChainId) {
+      console.log("You are not connected to the Mumbai Test Network!");
     }
 
     if (accounts.length !== 0) {
@@ -178,7 +172,7 @@ const App = () => {
     <>
       <Header title={header.name} logo={header.logo} account={currentAccount} connect={connectWallet} />
 
-      <Box w='100%' pt='5'>
+      <Box w='100%' pt='5' pb='5'>
         <Container maxW='container.xl'>
           {notificationMessage && <Notification level={notificationLevel} message={notificationMessage} />}
           <Hero title="Hero Banner">
@@ -189,13 +183,9 @@ const App = () => {
 
       <Box w='100%' mb='5'>
         <Container maxW='container.xl'>
-          <HStack spacing='24px'>
-            <Box w='100%' h='100' p='5' className='box-bg'>
-              <Heading as='h3' fontSize='xl'>Thank You To All My Sponsors</Heading>
-            </Box>
-            <Box w='100%' h='100' p='5' className='box-bg'>
-            <Heading as='h3' fontSize='xl'>Join Me On My Journey</Heading>
-            </Box>
+          <HStack spacing='24px' alignItems='flexStart'>
+            <StayTuned />
+            <ContactMe />
           </HStack>
         </Container>
       </Box>
@@ -205,8 +195,6 @@ const App = () => {
         <HStack spacing='24px'>
           <Box w='30%' p='5' className='box-bg'>
             <Heading as='h3' fontSize='lg'>NFT Section</Heading>
-            <Text>View Collection on OpenSea</Text>
-            <Text>https://testnets.opensea.io/assets/INSERT_CONTRACT_ADDRESS_HERE/INSERT_TOKEN_ID_HERE</Text>
             <Selector />
           </Box>
           <Box w='70%' p='5'>
