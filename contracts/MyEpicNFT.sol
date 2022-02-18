@@ -14,6 +14,8 @@ contract MyEpicNFT is ERC721URIStorage {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
 
+  event NewEpicNFTMinted(address sender, uint256 tokenId);
+
   // We need to pass the name of our NFTs token and its symbol.
   constructor() ERC721 ("MMA Fighters", "DJMMA") {
     console.log("NFT contract has been deployed. Woah!");
@@ -39,5 +41,6 @@ contract MyEpicNFT is ERC721URIStorage {
     _tokenIds.increment();
 
     console.log("An NFT w/ ID %s has been minted to %s", newItemId, msg.sender);
+    emit NewEpicNFTMinted(msg.sender, newItemId);
   }
 }

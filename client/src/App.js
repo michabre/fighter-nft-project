@@ -7,9 +7,18 @@ import {
   Container, 
   HStack,
   Heading,
-  Input, 
-  Textarea } from '@chakra-ui/react'
+  Input,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
+  Text,
+  Textarea,
+  useDisclosure } from '@chakra-ui/react'
 import { ethers } from "ethers"
+import parse from "html-react-parser";
 import abi from "./contracts/MyEpicNFT.json"
 
 import Header from "./layout/Header"
@@ -25,8 +34,6 @@ import "./App.css"
 
 const TWITTER_HANDLE = 'michabre'
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`
-// const OPENSEA_LINK = ''
-// const TOTAL_MINT_COUNT = 50
 
 const App = () => {
   let provider
@@ -34,7 +41,8 @@ const App = () => {
   let connectedContract
 
   const [currentAccount, setCurrentAccount] = useState("")
-  //const [status, setStatus] = useState("No active transaction")
+  const [status, setStatus] = useState("No active transaction")
+  const [statusLevel, setStatusLevel] = useState("No active transaction")
   const [notificationMessage, setNotificationMessage] = useState("")
   const [notificationLevel, setNotificationLevel] = useState("")
 
@@ -44,8 +52,11 @@ const App = () => {
   const [nftImage, setNftImage] = useState("")
   const [nftExternalUrl, setExternalNftUrl] = useState("")
 
+  const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const contractAddress = ""
+
+  //const contractAddress = "0x1849b82aaF769adcaE510d5F59e995c2728AD27F" // mumbai
+  const contractAddress = "0xc527209D5181D1113D91c53D76c0c2dC6a0bE260" // ganache
   const contractABI = abi.abi
 
   const checkIfWalletIsConnected = async () => {
@@ -53,12 +64,28 @@ const App = () => {
 
     if (!ethereum) {
       console.log("Make sure you have metamask!")
+      setNotificationMessage("Make sure you have metamask!")
+      setNotificationLevel("warning")
       return
     } else {
       console.log("We have the ethereum object", ethereum)
     }
 
     const accounts = await ethereum.request({ method: 'eth_accounts' })
+    let chainId = await ethereum.request({ method: 'eth_chainId' });
+    console.log("Connected to chain " + chainId);
+
+    const mumbaiChainId = "0x13881"; 
+    const ganacheChainId = "0x539";
+    // if (chainId !== mumbaiChainId) {
+    //   console.log("You are not connected to the Mumbai Test Network!");
+    // }
+
+    if (chainId !== ganacheChainId) {
+      console.log("You are not connected to the Ganache Test Network!");
+      setNotificationMessage("You are not connected to the Ganache Test Network!")
+      setNotificationLevel("warning")
+    }
 
     if (accounts.length !== 0) {
       const account = accounts[0]
@@ -80,6 +107,9 @@ const App = () => {
       }
 
       const accounts = await ethereum.request({ method: "eth_requestAccounts" })
+      let chainId = await ethereum.request({ method: 'eth_chainId' });
+      console.log("Connected to chain " + chainId);
+
       setCurrentAccount(accounts[0])
     } catch (error) {
       console.log('Error', error)
@@ -104,6 +134,17 @@ const App = () => {
         await nftTxn.wait();
         
         console.log(`Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTxn.hash}`);
+
+        connectedContract.on("NewEpicNFTMinted", (from, tokenId) => {
+          setStatusLevel("Successful Mint!")
+          setStatus(`<p>Hey there! We've minted your NFT. It may be blank right now. It can take a max of 10 min to show up on OpenSea.</p><br /><p><a href="https://testnets.opensea.io/assets/${contractAddress}/${tokenId.toNumber()}"><strong>View on OpenSea</strong></a></p>`)
+          onOpen()
+        });
+
+        setNftName("")
+        setNftDescription("")
+        setExternalNftUrl("")
+        setNftImage("")
   
       } else {
         console.log("Ethereum object doesn't exist!");
@@ -121,7 +162,7 @@ const App = () => {
       "url": setExternalNftUrl
     }
     let text = event.target.value
-    let type = event.target.dataset.type
+    let type = event.target.getAttribute("data-type")
 
     action[type](text)
   }
@@ -164,6 +205,8 @@ const App = () => {
         <HStack spacing='24px'>
           <Box w='30%' p='5' className='box-bg'>
             <Heading as='h3' fontSize='lg'>NFT Section</Heading>
+            <Text>View Collection on OpenSea</Text>
+            <Text>https://testnets.opensea.io/assets/INSERT_CONTRACT_ADDRESS_HERE/INSERT_TOKEN_ID_HERE</Text>
             <Selector />
           </Box>
           <Box w='70%' p='5'>
@@ -215,6 +258,17 @@ const App = () => {
       </Box>)}
  
       <Footer copyright="Lakwatzero Digital" twitterHandle={TWITTER_HANDLE} twitterLink={TWITTER_LINK} />
+
+      <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>{statusLevel}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody pb={6}>
+            {parse(status)}
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 }
