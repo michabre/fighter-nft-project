@@ -120,14 +120,11 @@ const App = () => {
 
         console.log(`Going to pop wallet now to pay gas...`)        
         let nftTxn = await connectedContract.makeAnEpicNFT(jsonData)
-        onOpen()
   
-        setStatusLevel("Mining...")
-        setStatus(`please wait...`)
-        await nftTxn.wait();
+        console.log(`Mining, please wait...`)
+        await nftTxn.wait()
         
-        setStatusLevel("Mined")
-        setStatus(`See transaction: <a href="https://mumbai.polygonscan.com/tx/${nftTxn.hash}"><strong>https://mumbai.polygonscan.com/tx/${nftTxn.hash}</strong></a>`)
+        console.log(`See transaction: https://mumbai.polygonscan.com/tx/${nftTxn.hash}`)
 
         connectedContract.on("NewEpicNFTMinted", (from, tokenId) => {
           console.log("NewEpicNFTMinted")
