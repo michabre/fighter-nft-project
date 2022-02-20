@@ -56,7 +56,8 @@ const App = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
 
-  const contractAddress = "0x04d8d376Bf9d6ceA8E6d900F9305b2a9401025d3"
+  //const contractAddress = "0x04d8d376Bf9d6ceA8E6d900F9305b2a9401025d3"
+  const contractAddress = "0x4CCBBAD6D7e0b6C45bE11458F875e9aB7f91a8f5"
   const contractABI = abi.abi
 
   const checkIfWalletIsConnected = async () => {

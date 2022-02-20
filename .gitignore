@@ -8,9 +8,3 @@ typechain
 cache
 artifacts
 hardhat.config.js
-
-# project files
-client/src/data
-client/src/data/*
-client/src/images
-client/src/images/*
