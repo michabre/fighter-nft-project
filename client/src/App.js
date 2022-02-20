@@ -130,6 +130,7 @@ const App = () => {
           console.log("NewEpicNFTMinted")
           setStatusLevel("Successful Mint!")
           setStatus(`<p>Hey there! We've minted your NFT. It may be blank right now. It can take a max of 10 min to show up on OpenSea.</p><br /><p><a href="https://testnets.opensea.io/assets/${contractAddress}/${tokenId.toNumber()}"><strong>View on OpenSea</strong></a></p>`)
+          onOpen()
 
           setNftName("")
           setNftDescription("")
