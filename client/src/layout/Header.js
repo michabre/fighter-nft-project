@@ -7,10 +7,7 @@ import {
   Heading,
   Spacer
 } from '@chakra-ui/react'
-
 import { LockIcon, StarIcon} from '@chakra-ui/icons'
-import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa';
-
 import shortenAddress from '../helpers/shortenAddress'
 
 const Header = ({ title, account, connect }) => { 
@@ -33,9 +30,6 @@ const Header = ({ title, account, connect }) => {
               {shortenAddress(account)}
             </Button>
           )}
-             <Button><FaFacebookF /></Button>
-            <Button><FaInstagram /></Button>
-            <Button><FaTwitter /></Button>
           </ButtonGroup>
         </Box>
       </Flex>

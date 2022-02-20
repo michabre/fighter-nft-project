@@ -22,16 +22,15 @@ import abi from "./contracts/MyEpicNFT.json"
 
 import Header from "./layout/Header"
 import Hero from "./components/Hero/Hero"
-//import Slideshow from "./components/Slideshow/Slideshow"
 import FighterStats from "./components/Stats/FighterStats"
 import Selector from "./components/NFTs/Selector"
-//import EmailSignup from "./components/CTAs/EmailSignup"
 import Footer from "./layout/Footer"
 import Notification from "./components/Notification/Notification"
-
-import "./App.css"
 import StayTuned from './components/CTAs/StayTuned'
 import ContactMe from './components/CTAs/ContactMe'
+
+import "./App.css"
+
 
 const TWITTER_HANDLE = 'michabre'
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`
@@ -55,9 +54,7 @@ const App = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-
-  //const contractAddress = "0x04d8d376Bf9d6ceA8E6d900F9305b2a9401025d3"
-  const contractAddress = "0x4CCBBAD6D7e0b6C45bE11458F875e9aB7f91a8f5"
+  const contractAddress = "0xf086a2c48982c47dB3292157bb104fF0bF913f01" // mumbai
   const contractABI = abi.abi
 
   const checkIfWalletIsConnected = async () => {
@@ -77,7 +74,6 @@ const App = () => {
     console.log("Connected to chain " + chainId);
 
     const mumbaiChainId = "0x13881"; 
-    //const ganacheChainId = "0x539";
     if (chainId !== mumbaiChainId) {
       console.log("You are not connected to the Mumbai Test Network!");
     }
@@ -121,26 +117,29 @@ const App = () => {
         connectedContract = new ethers.Contract(contractAddress, contractABI, signer);
 
         let jsonData = Base64.encode(`{"description": "${nftDescription}", "external_url": "${nftExternalUrl}", "image": "${nftImage}", "name": "${nftName}"}`)
+
+        console.log(`Going to pop wallet now to pay gas...`)        
+        let nftTxn = await connectedContract.makeAnEpicNFT(jsonData)
+        onOpen()
   
-        console.log("Going to pop wallet now to pay gas...")
-        let nftTxn = await connectedContract.makeAnEpicNFT(jsonData);
-  
-        console.log("Mining...please wait.")
+        setStatusLevel("Mining...")
+        setStatus(`please wait...`)
         await nftTxn.wait();
         
-        console.log(`Mined, see transaction: https://mumbai.polygonscan.com/tx/${nftTxn.hash}`);
+        setStatusLevel("Mined")
+        setStatus(`See transaction: <a href="https://mumbai.polygonscan.com/tx/${nftTxn.hash}"><strong>https://mumbai.polygonscan.com/tx/${nftTxn.hash}</strong></a>`)
 
         connectedContract.on("NewEpicNFTMinted", (from, tokenId) => {
+          console.log("NewEpicNFTMinted")
           setStatusLevel("Successful Mint!")
           setStatus(`<p>Hey there! We've minted your NFT. It may be blank right now. It can take a max of 10 min to show up on OpenSea.</p><br /><p><a href="https://testnets.opensea.io/assets/${contractAddress}/${tokenId.toNumber()}"><strong>View on OpenSea</strong></a></p>`)
-          onOpen()
+
+          setNftName("")
+          setNftDescription("")
+          setExternalNftUrl("")
+          setNftImage("")
         });
 
-        setNftName("")
-        setNftDescription("")
-        setExternalNftUrl("")
-        setNftImage("")
-  
       } else {
         console.log("Ethereum object doesn't exist!");
       }
