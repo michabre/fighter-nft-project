@@ -30,3 +30,12 @@ h1 {
   height: 1.5rem;
   width: 1.5rem;
 }
+
+/* MailChimp Overrides */
+#mc_embed_signup form {
+  padding-left: 0 !important;
+}
+#hidden-mc-field {
+  position: absolute; 
+  left: -5000px;
+}

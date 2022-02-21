@@ -1,18 +1,14 @@
 import * as React from 'react'
-import { Text, Stack } from '@chakra-ui/react'
+import { Text, Stack, Container } from '@chakra-ui/react'
 
-const Footer = ({ copyright, twitterHandle, twitterLink }) => { 
+const Footer = ({ copyright }) => { 
   return (
-    <Stack h='30vh' pt='5' spacing='1'>
-      <Text color='gray.200' fontSize='md' align='center'><a
-            className="footer-text"
-            href={twitterLink}
-            target="_blank"
-            rel="noreferrer"
-          >{`built by @${twitterHandle}`}</a>
-      </Text>
-      <Text color='gray.200' fontSize='md' align='center' as='i'>{copyright}</Text>
-    </Stack>
+    <Container maxW='container.xl' mt='5'>
+      <Stack h='30vh' pt='5' spacing='1'>
+        <Text color='gray.200' fontSize='sm' align='left' as='i'>Copyright &copy; 2022</Text>
+        <Text color='gray.200' fontSize='sm' align='left' as='i'>Built by {copyright}</Text>
+      </Stack>
+    </Container>
   )
 }
 

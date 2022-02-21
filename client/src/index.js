@@ -4,13 +4,13 @@ import { ChakraProvider } from '@chakra-ui/react'
 import "@fontsource/montserrat"
 import "@fontsource/karla"
 import theme from './theme'
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import App from './App'
+import reportWebVitals from './reportWebVitals'
 
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <App />
+      <App test={process.env.REACT_APP_API_URL} />
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById('root')

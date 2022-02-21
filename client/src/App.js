@@ -3,18 +3,14 @@ import React, { useEffect, useState } from "react"
 import Base64 from "base-64"
 import { 
   Box, 
-  Button, 
   Container, 
   HStack,
-  Heading,
-  Input,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  Textarea,
   useDisclosure } from '@chakra-ui/react'
 import { ethers } from "ethers"
 import parse from "html-react-parser";
@@ -23,17 +19,13 @@ import abi from "./contracts/MyEpicNFT.json"
 import Header from "./layout/Header"
 import Hero from "./components/Hero/Hero"
 import FighterStats from "./components/Stats/FighterStats"
-import Selector from "./components/NFTs/Selector"
+import NFTReveal from "./components/NFTs/NFTReveal"
 import Footer from "./layout/Footer"
 import Notification from "./components/Notification/Notification"
 import StayTuned from './components/CTAs/StayTuned'
 import ContactMe from './components/CTAs/ContactMe'
-
 import "./App.css"
-
-
-const TWITTER_HANDLE = 'michabre'
-const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`
+//import TestForm from './components/NFTs/TestForm'
 
 const App = () => {
   let provider
@@ -190,60 +182,19 @@ const App = () => {
 
       {currentAccount && (<Box w='100%'>
         <Container maxW='container.xl'>
-        <HStack spacing='24px'>
-          <Box w='30%' p='5' className='box-bg'>
-            <Heading as='h3' fontSize='lg'>NFT Section</Heading>
-            <Selector />
-          </Box>
-          <Box w='70%' p='5'>
-            <Heading as='h3' fontSize='lg'>NFT Section</Heading>
-
-            <HStack spacing='24px'>
-              <Box>
-                <Input 
-                  value={nftName}
-                  data-type="name"
-                  onChange={updateStateValue}
-                  placeholder='Enter your name' 
-                  size='lg' 
-                  mb={5} 
-                />
-                <Input 
-                  value={nftImage}
-                  data-type="image"
-                  onChange={updateStateValue}
-                  placeholder='Add an Image' 
-                  size='lg' 
-                  mb={5} 
-                />
-                <Input 
-                  value={nftExternalUrl}
-                  data-type="url"
-                  onChange={updateStateValue}
-                  placeholder='External URL' 
-                  size='lg' 
-                  mb={5} 
-                />
-                <Textarea
-                  value={nftDescription}
-                  data-type="description"
-                  onChange={updateStateValue}
-                  placeholder='Write a description'
-                  size='lg'
-                  mb={5}
-                />
-              </Box>
-            </HStack>
-
-            <Button onClick={askContractToMintNft} className="cta-button connect-wallet-button">
-             Mint NFT
-            </Button>
-          </Box>
-          </HStack>
+          {/* <TestForm
+            nftName={nftName} 
+            nftImage={nftImage}
+            nftExternalUrl={nftExternalUrl}
+            nftDescription={nftDescription}
+            updateStateValue={updateStateValue}
+            askContractToMintNft={askContractToMintNft}
+          /> */}
+          <NFTReveal />
         </Container>
       </Box>)}
  
-      <Footer copyright="Lakwatzero Digital" twitterHandle={TWITTER_HANDLE} twitterLink={TWITTER_LINK} />
+      <Footer copyright="Lakwatzero Digital" />
 
       <Modal closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
