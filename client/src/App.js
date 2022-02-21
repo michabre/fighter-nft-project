@@ -54,8 +54,8 @@ const App = () => {
 
     if (!ethereum) {
       console.log("Make sure you have metamask!")
-      setNotificationMessage("Make sure you have metamask!")
-      setNotificationLevel("warning")
+      // setNotificationMessage("Make sure you have metamask!")
+      // setNotificationLevel("warning")
       return
     } else {
       console.log("We have the ethereum object", ethereum)
