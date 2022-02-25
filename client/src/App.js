@@ -25,6 +25,7 @@ import Notification from "./components/Notification/Notification"
 import StayTuned from './components/CTAs/StayTuned'
 import ContactMe from './components/CTAs/ContactMe'
 import Sponsors from './components/CTAs/Sponsors'
+import CookieConsent from './components/CookieConsent/CookieConsent'
 import "./App.css"
 
 const App = () => {
@@ -37,6 +38,9 @@ const App = () => {
   const [statusLevel, setStatusLevel] = useState("No active transaction")
   const [notificationMessage, setNotificationMessage] = useState("")
   const [notificationLevel, setNotificationLevel] = useState("")
+
+  const [trackingConsent, setTrackingConsent] = useState(false)
+
 
   // NFT Details
   const [nftDescription, setNftDescription] = useState("")
@@ -149,6 +153,10 @@ const App = () => {
     action[type](text)
   }
 
+  const acceptHandler = () => {
+    setTrackingConsent(true)
+}
+
   /*
   * This runs our function when the page loads.
   */
@@ -158,6 +166,8 @@ const App = () => {
 
   return (
     <>
+      {trackingConsent === false && <CookieConsent consent={acceptHandler} />}
+
       <Header title={header.name} logo={header.logo} account={currentAccount} connect={connectWallet} />
 
       <Box w='100%' pt='5' pb='5'>
