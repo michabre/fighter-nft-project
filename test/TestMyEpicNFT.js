@@ -36,6 +36,16 @@ describe("MyEpicNFT", function () {
       let verify = await contract.balanceOf(owner.address);
       return assert.equal(verify, 1);
     });
+
+    it("User1 mints an NFT", async () => {
+      const [owner, user1, user2] = await ethers.getSigners();
+      let jsonData1 = base64.encode('{"description": "What To Do on Your Day Off", "external_url": "add_external_url_here", "image": "image_url_here", "name": "Ferris Bueller"}');
+      await contract.connect(user1).makeAnEpicNFT(jsonData1);
+      let verify = await contract.balanceOf(user1.address);
+      return assert.equal(verify, 1);
+    });
+
+
   })
   
 });
