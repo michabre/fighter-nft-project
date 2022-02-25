@@ -4,13 +4,13 @@ import Base64 from "base-64"
 import { 
   Box, 
   Container, 
-  HStack,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalCloseButton,
+  SimpleGrid,
   useDisclosure } from '@chakra-ui/react'
 import { ethers } from "ethers"
 import parse from "html-react-parser";
@@ -24,8 +24,8 @@ import Footer from "./layout/Footer"
 import Notification from "./components/Notification/Notification"
 import StayTuned from './components/CTAs/StayTuned'
 import ContactMe from './components/CTAs/ContactMe'
+import Sponsors from './components/CTAs/Sponsors'
 import "./App.css"
-//import TestForm from './components/NFTs/TestForm'
 
 const App = () => {
   let provider
@@ -54,8 +54,6 @@ const App = () => {
 
     if (!ethereum) {
       console.log("Make sure you have metamask!")
-      // setNotificationMessage("Make sure you have metamask!")
-      // setNotificationLevel("warning")
       return
     } else {
       console.log("We have the ethereum object", ethereum)
@@ -173,23 +171,17 @@ const App = () => {
 
       <Box w='100%' mb='5'>
         <Container maxW='container.xl'>
-          <HStack spacing='24px' alignItems='flexStart'>
+        <SimpleGrid columns={[1, null, 2]} spacing='24px'>
             <StayTuned />
             <ContactMe />
-          </HStack>
+          </SimpleGrid>
         </Container>
       </Box>
 
+      <Sponsors />
+
       {currentAccount && (<Box w='100%'>
         <Container maxW='container.xl'>
-          {/* <TestForm
-            nftName={nftName} 
-            nftImage={nftImage}
-            nftExternalUrl={nftExternalUrl}
-            nftDescription={nftDescription}
-            updateStateValue={updateStateValue}
-            askContractToMintNft={askContractToMintNft}
-          /> */}
           <NFTReveal />
         </Container>
       </Box>)}
