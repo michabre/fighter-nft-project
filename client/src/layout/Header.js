@@ -14,7 +14,7 @@ const Header = ({ title, account, connect }) => {
   return (
       <Flex>
         <Box p='4' display='flex' alignItems='center'>
-          <Heading as='h1' fontSize='24px'>{title}</Heading>
+          <Heading as='h1' size='md'>{title}</Heading>
         </Box>
         <Spacer />
         
