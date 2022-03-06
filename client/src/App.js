@@ -86,8 +86,8 @@ const App = () => {
       const { ethereum } = window
 
       if (!ethereum) {
-        setNotificationMessage("No wallet found. Get MetaMask!")
-        setNotificationLevel("warning")
+        // setNotificationMessage("No wallet found. Get MetaMask!")
+        // setNotificationLevel("warning")
         return
       }
 
@@ -182,8 +182,8 @@ const App = () => {
       <Box w='100%' mb='5'>
         <Container maxW='container.xl'>
         <SimpleGrid columns={[1, null, 2]} spacing='24px'>
-            <StayTuned />
-            <ContactMe />
+          <ContactMe />
+          <StayTuned /> 
           </SimpleGrid>
         </Container>
       </Box>

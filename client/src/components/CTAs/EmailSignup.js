@@ -24,7 +24,7 @@ const EmailSignup = ({action}) => {
                   mr='3'
                 />
                 <div id="hidden-mc-field" aria-hidden="true">
-                  <input type="text" name="b_c206d0bc37dc43c7920af49f4_90e19a98e1" tabindex="-1" value="" />
+                  <input type="text" name="b_c206d0bc37dc43c7920af49f4_90e19a98e1" tabIndex="-1" defaultValue="" />
                 </div>
                 <Button
                   colorScheme='red'

@@ -13,7 +13,7 @@ const Sponsors = () => {
   return (
     <Box w='100%' mb='5'>
         <Container maxW='container.xl'>
-            <SimpleGrid columns={[1, null, 2, 3]} spacing='24px'>
+            <SimpleGrid columns={[1, null, 2, 3]} spacing='16px'>
               <Box>
                 <Heading as='h3' fontSize='42px' align='center'>Thank You</Heading>
                 <Text align='center'>Big thank you to all my sponsors and trainers.</Text>

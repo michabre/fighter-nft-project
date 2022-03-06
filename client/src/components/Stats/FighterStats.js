@@ -2,13 +2,12 @@ import React from 'react'
 import {
   Box,
   Heading,
-  Flex,
   Text,
+  SimpleGrid,
   Stat,
   StatLabel,
   StatNumber,
-  StatGroup,
-  Spacer
+  StatGroup
 } from '@chakra-ui/react'
 
 import { FaCanadianMapleLeaf } from 'react-icons/fa';
@@ -19,22 +18,22 @@ const FighterStats = ({ data }) => {
     return(
       <>
         <Text fontSize='xl' pb='0'>{stats.organization}'s</Text>
-        <Heading as='h2' fontSize='100px' lineHeight='90px' >{stats.firstname}</Heading>
-        <Heading as='h2' fontSize='100px' lineHeight='90px' pb='3'>{stats.lastname}</Heading>
+        <Heading as='h2' fontSize='75px' lineHeight='75px' >{stats.firstname}</Heading>
+        <Heading as='h2' fontSize='75px' lineHeight='75px' pb='3'>{stats.lastname}</Heading>
         
         <Text fontSize='lg'>{stats.class}</Text>
         <Text fontSize='lg'>{stats.country} <span className="canada"><FaCanadianMapleLeaf /></span></Text>
         <Text fontSize='lg'>{stats.gym}</Text>
 
-        <Box w='50%' py='5'>
+        <Box w={{ sm: '100%', md: '50%'}} mt='5' p='3' className='box-bg'>
           <StatGroup>
             <Stat>
               <StatLabel>Record</StatLabel>
-              <StatNumber>{stats.record}</StatNumber>
+              <StatNumber fontSize={{ sm: '20px', md: '24px'}}>{stats.record}</StatNumber>
             </Stat>
             <Stat>
               <StatLabel>Style</StatLabel>
-              <StatNumber>{stats.style}</StatNumber>
+              <StatNumber fontSize={{ sm: '20px', md: '24px'}}>{stats.style}</StatNumber>
             </Stat>
             <Stat>
             </Stat>
@@ -42,29 +41,28 @@ const FighterStats = ({ data }) => {
           <StatGroup py='3'>
             <Stat>
               <StatLabel>Height</StatLabel>
-              <StatNumber>{stats.height}</StatNumber>
+              <StatNumber fontSize={{ sm: '20px', md: '24px'}}>{stats.height}</StatNumber>
             </Stat>
             <Stat>
               <StatLabel>Weight</StatLabel>
-              <StatNumber>{stats.weight}</StatNumber>
+              <StatNumber fontSize={{ sm: '20px', md: '24px'}}>{stats.weight}</StatNumber>
             </Stat>
             <Stat>
               <StatLabel>Reach</StatLabel>
-              <StatNumber>{stats.reach}</StatNumber>
+              <StatNumber fontSize={{ sm: '20px', md: '24px'}}>{stats.reach}</StatNumber>
             </Stat>
           </StatGroup>
 
-          <Flex mt='5' alignItems='flex-start' justifyContent='space-between'>
-            <Box w='48%'>
+          <SimpleGrid columns={[1, null, 2]} spacing='16px'>
+            <Box w='100%'>
               <Text fontSize='md'><strong>Last Fight:</strong></Text>
               <Text fontSize='md'>{stats.lastfight}</Text>
             </Box>
-            <Spacer />
-            <Box w='48%'>
+            <Box w='100%'>
               <Text fontSize='md'><strong>Next Fight:</strong></Text>
               <Text fontSize='md'>{stats.nextfight}</Text>
             </Box>
-          </Flex>
+          </SimpleGrid>
         </Box>
       </>
     )
