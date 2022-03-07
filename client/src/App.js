@@ -21,6 +21,7 @@ import Hero from "./components/Hero/Hero"
 import FighterStats from "./components/Stats/FighterStats"
 import NFTReveal from "./components/NFTs/NFTReveal"
 import Footer from "./layout/Footer"
+import InstagramCollection from "./components/NFTs/InstagramCollection"
 import Notification from "./components/Notification/Notification"
 import StayTuned from './components/CTAs/StayTuned'
 import ContactMe from './components/CTAs/ContactMe'
@@ -50,7 +51,8 @@ const App = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const contractAddress = "0xf086a2c48982c47dB3292157bb104fF0bF913f01" // mumbai
+  //const contractAddress = "0xf086a2c48982c47dB3292157bb104fF0bF913f01" // mumbai
+  const contractAddress = "0x8be05272972fD59C73e5583777C651726dCFBdB5" // ganache
   const contractABI = abi.abi
 
   const checkIfWalletIsConnected = async () => {
@@ -86,8 +88,8 @@ const App = () => {
       const { ethereum } = window
 
       if (!ethereum) {
-        // setNotificationMessage("No wallet found. Get MetaMask!")
-        // setNotificationLevel("warning")
+        setNotificationMessage("No wallet found. Get MetaMask!")
+        setNotificationLevel("warning")
         return
       }
 
@@ -193,6 +195,7 @@ const App = () => {
       {currentAccount && (<Box w='100%'>
         <Container maxW='container.xl'>
           <NFTReveal />
+          <InstagramCollection token="" />
         </Container>
       </Box>)}
  
