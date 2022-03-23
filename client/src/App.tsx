@@ -1,5 +1,6 @@
-import { stats, header } from './data/data'
+import { header } from './data/data'
 import React, { useEffect, useState } from "react"
+import { Routes, Route } from 'react-router-dom'
 import Base64 from "base-64"
 import { 
   Box, 
@@ -10,21 +11,17 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  SimpleGrid,
   useDisclosure } from '@chakra-ui/react'
 import { ethers } from "ethers"
 import parse from "html-react-parser";
 import abi from "./contracts/MyEpicNFT.json"
 
+import Home from './routes/home/home.component'
+
 import Header from "./components/header/header.component"
-import FighterStats from "./components/stats/fighter-stats.component"
 import NFTReveal from "./components/NFTs/NFTReveal"
 import Footer from "./components/footer/footer.component"
 import Notification from "./components/notification/notification.component"
-import StayTuned from './components/CTAs/StayTuned'
-import ContactMe from './components/contact-me/contact-me.component'
-import Sponsors from './components/sponsors/sponsors.component'
-
 import CookieConsent from './components/cookie-consent/cookie-consent.component'
 
 import "./App.scss"
@@ -180,20 +177,12 @@ const App = () => {
       <Box w='100%' pt='5' pb='5'>
         <Container maxW='container.xl'>
           {notificationMessage && <Notification level={notificationLevel} message={notificationMessage} />}
-          <FighterStats data={stats} />
         </Container>
       </Box>
 
-      <Box w='100%' mb='5'>
-        <Container maxW='container.xl'>
-        <SimpleGrid columns={[1, null, 2]} spacing='24px'>
-          <ContactMe />
-          <StayTuned /> 
-          </SimpleGrid>
-        </Container>
-      </Box>
-
-      <Sponsors />
+      <Routes>
+        <Route index element={<Home />} />
+      </Routes>
 
       {currentAccount && (<Box w='100%'>
         <Container maxW='container.xl'>
