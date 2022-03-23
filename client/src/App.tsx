@@ -16,17 +16,18 @@ import { ethers } from "ethers"
 import parse from "html-react-parser";
 import abi from "./contracts/MyEpicNFT.json"
 
-import Header from "./layout/Header"
-import Hero from "./components/Hero/Hero"
-import FighterStats from "./components/Stats/FighterStats"
+import Header from "./components/header/header.component"
+import FighterStats from "./components/stats/fighter-stats.component"
 import NFTReveal from "./components/NFTs/NFTReveal"
-import Footer from "./layout/Footer"
-import Notification from "./components/Notification/Notification"
+import Footer from "./components/footer/footer.component"
+import Notification from "./components/notification/notification.component"
 import StayTuned from './components/CTAs/StayTuned'
-import ContactMe from './components/CTAs/ContactMe'
-import Sponsors from './components/CTAs/Sponsors'
-import CookieConsent from './components/CookieConsent/CookieConsent'
-import "./App.css"
+import ContactMe from './components/contact-me/contact-me.component'
+import Sponsors from './components/sponsors/sponsors.component'
+
+import CookieConsent from './components/cookie-consent/cookie-consent.component'
+
+import "./App.scss"
 
 const App = () => {
   let provider
@@ -50,8 +51,11 @@ const App = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const contractAddress = "0xf086a2c48982c47dB3292157bb104fF0bF913f01" // mumbai
+  //const contractAddress = "0xf086a2c48982c47dB3292157bb104fF0bF913f01" // mumbai
+  const contractAddress = "0xE5CA947f1acEA4A92171Ba8E48d700d58902CBAE" // ganache
   const contractABI = abi.abi
+
+
 
   const checkIfWalletIsConnected = async () => {
     const { ethereum } = window
@@ -140,17 +144,20 @@ const App = () => {
     }
   }
 
-  const updateStateValue = (event) => {
-    const action = {
-      "name": setNftName,
-      "description": setNftDescription,
-      "image": setNftImage,
-      "url": setExternalNftUrl
-    }
-    let text = event.target.value
-    let type = event.target.getAttribute("data-type")
+  interface ActionOptions {
+    [key: string]: (n:string) => void;
+  }
 
-    action[type](text)
+  const action:ActionOptions = {
+    "name": setNftName,
+    "description": setNftDescription,
+    "image": setNftImage,
+    "url": setExternalNftUrl
+  }
+
+  const updateStateValue = (event:any) => {
+    let type:string = event.target.getAttribute("data-type")
+    action[type](event.target.value)
   }
 
   const acceptHandler = () => {
@@ -162,20 +169,18 @@ const App = () => {
   */
   useEffect(() => {
     checkIfWalletIsConnected()
-  })
+  }, [])
 
   return (
     <>
       {trackingConsent === false && <CookieConsent consent={acceptHandler} />}
 
-      <Header title={header.name} logo={header.logo} account={currentAccount} connect={connectWallet} />
+      <Header title={header.name} account={currentAccount} connect={connectWallet} />
 
       <Box w='100%' pt='5' pb='5'>
         <Container maxW='container.xl'>
           {notificationMessage && <Notification level={notificationLevel} message={notificationMessage} />}
-          <Hero title="Hero Banner">
-            <FighterStats data={stats} />
-          </Hero>
+          <FighterStats data={stats} />
         </Container>
       </Box>
 

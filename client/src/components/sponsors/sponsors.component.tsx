@@ -15,7 +15,7 @@ const Sponsors = () => {
         <Container maxW='container.xl'>
             <SimpleGrid columns={[1, null, 2, 3]} spacing='16px'>
               <Box>
-                <Heading as='h3' fontSize='42px' align='center'>Thank You</Heading>
+                <Text as='h3' fontSize='42px' align='center' fontWeight='bold'>Thank You</Text>
                 <Text align='center'>Big thank you to all my sponsors and trainers.</Text>
               </Box>
               <Box className='box-bg' p='3'>

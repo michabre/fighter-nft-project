@@ -8,9 +8,9 @@ import {
   Spacer
 } from '@chakra-ui/react'
 import { LockIcon, StarIcon} from '@chakra-ui/icons'
-import shortenAddress from '../helpers/shortenAddress'
+import shortenAddress from '../../utils/shortenAddress'
 
-const Header = ({ title, account, connect }) => { 
+const Header = ({ title, account, connect }:{title:string, account:string, connect:() => void}) => { 
   return (
       <Flex>
         <Box p='4' display='flex' alignItems='center'>

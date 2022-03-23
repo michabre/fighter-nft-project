@@ -3,7 +3,7 @@ import {
   Box, 
   Heading,
   Text } from '@chakra-ui/react'
-import EmailSignup from './EmailSignup';
+import EmailSignup from '../email-sign-up/email-sign-up.component';
 
 const StayTuned = () => {
   return (

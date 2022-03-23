@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Text, Stack, Container } from '@chakra-ui/react'
 
-const Footer = ({ copyright }) => { 
+const Footer = ({ copyright }:{ copyright:string }) => { 
   return (
     <Container maxW='container.xl' mt='5'>
       <Stack h='30vh' pt='5' spacing='1'>
