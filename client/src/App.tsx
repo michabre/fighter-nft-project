@@ -87,8 +87,8 @@ const App = () => {
       const { ethereum } = window
 
       if (!ethereum) {
-        // setNotificationMessage("No wallet found. Get MetaMask!")
-        // setNotificationLevel("warning")
+        setNotificationMessage("No wallet found. Get MetaMask!")
+        setNotificationLevel("warning")
         return
       }
 
@@ -187,6 +187,7 @@ const App = () => {
       {currentAccount && (<Box w='100%'>
         <Container maxW='container.xl'>
           <NFTReveal />
+          <InstagramCollection token="" />
         </Container>
       </Box>)}
  
